@@ -1,0 +1,1 @@
+# fashiontech-analise-competitiva
