@@ -1,0 +1,50 @@
+selenium (webdriver e Options):
+
+O que faz: É uma ferramenta robusta de automação web que permite controlar um navegador real através de código.
+
+Por que usamos no projeto: Grandes e-commerces (como a C&A e a Renner) possuem bloqueios anti-robôs e injetam seus produtos dinamicamente via JavaScript. Usamos o Selenium no modo "fantasma" (headless) para simular o comportamento de um usuário humano, aguardar o carregamento completo da página e contornar os erros de Acesso Negado (403).
+
+bs4 (BeautifulSoup):
+
+O que faz: É um "analisador" (parser) que lê o emaranhado de códigos HTML de uma página da web e permite buscar informações de forma estruturada.
+
+Por que usamos no projeto: Após o Selenium abrir a página, usamos o BeautifulSoup para vasculhar o código-fonte e extrair especificamente as tags (div, article) que continham as descrições e os valores das peças de moda sustentável.
+
+time (Biblioteca nativa do Python):
+
+O que faz: Fornece funções relacionadas a tempo, como medições de performance ou paralisação de processos.
+
+Por que usamos no projeto: Utilizamos a função time.sleep() para criar pausas estratégicas de alguns segundos entre as ações do nosso robô. Isso garante que a página tenha tempo de carregar os elementos e evita sobrecarregar os servidores das lojas.
+
+ Bibliotecas de Transformação e Limpeza de Dados
+pandas:
+
+O que faz: É a principal biblioteca do Python para manipulação, limpeza e análise de dados em formato tabular (linhas e colunas, chamados de DataFrames).
+
+Por que usamos no projeto: Utilizamos para converter os textos soltos extraídos da web em uma tabela de banco de dados estruturada, permitindo remover duplicatas, calcular o ticket médio das roupas e exportar o resultado final para CSV e Excel.
+
+re (Expressões Regulares - nativa do Python):
+
+O que faz: Fornece operações de correspondência de padrões complexos em textos.
+
+Por que usamos no projeto: Foi essencial para a engenharia de dados. Usamos uma regra de Regex para localizar matematicamente onde o valor estava no texto bruto (encontrando o "R$") e isolar os números de forma limpa, separando o nome do produto do seu preço.
+
+ Bibliotecas de Business Intelligence e Tendências
+pytrends:
+
+O que faz: É uma API não oficial que permite conectar e extrair dados diretamente do banco de dados do Google Trends.
+
+Por que usamos no projeto: Para cruzar a nossa análise interna de precificação de estoque com o mindshare externo. Ela nos forneceu o volume histórico de buscas (0 a 100) para C&A, Renner e Riachuelo, permitindo identificar qual marca domina o interesse do consumidor.
+
+ Bibliotecas de Visualização de Dados (Data Storytelling)
+matplotlib.pyplot:
+
+O que faz: É a biblioteca base do Python para criação de gráficos 2D.
+
+Por que usamos no projeto: Para criar a "tela" e a estrutura lógica por trás dos nossos gráficos, ajustando tamanhos de eixos, títulos e legendas.
+
+seaborn:
+
+O que faz: Construída em cima do Matplotlib, é uma biblioteca focada em visualização de dados estatísticos de forma elegante e com menos linhas de código.
+
+Por que usamos no projeto: Para gerar os nossos visuais estatísticos avançados, como o Boxplot de preços. Ela facilitou a injeção da sua paleta de cores minimalista (Marrom Sépia e Bege Quente) diretamente nos gráficos, garantindo a estética clean exigida no seu portfólio.
