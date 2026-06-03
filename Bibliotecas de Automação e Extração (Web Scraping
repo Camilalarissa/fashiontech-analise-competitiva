@@ -1,50 +1,23 @@
-selenium (webdriver e Options):
+##  Bibliotecas e Tecnologias Utilizadas
 
-O que faz: É uma ferramenta robusta de automação web que permite controlar um navegador real através de código.
+Abaixo estão detalhadas as principais bibliotecas Python utilizadas para a construção deste motor de *Web Scraping* e *Business Intelligence*, juntamente com a justificativa técnica para cada escolha arquitetural no projeto.
 
-Por que usamos no projeto: Grandes e-commerces (como a C&A e a Renner) possuem bloqueios anti-robôs e injetam seus produtos dinamicamente via JavaScript. Usamos o Selenium no modo "fantasma" (headless) para simular o comportamento de um usuário humano, aguardar o carregamento completo da página e contornar os erros de Acesso Negado (403).
+### Automação e Extração (Web Scraping)
 
-bs4 (BeautifulSoup):
+* **`selenium` (webdriver e Options):** Ferramenta robusta de automação web. Utilizada no modo *headless* (fantasma) para simular navegação humana, contornar bloqueios de segurança (Erro 403) e forçar a renderização de páginas dinâmicas que injetam produtos via JavaScript.
+* **`bs4` (BeautifulSoup):** Analisador (*parser*) de HTML e XML. Aplicado para vasculhar o código-fonte extraído pelo Selenium e isolar especificamente as tags (`div`, `article`, `a`) que continham as descrições e os valores das peças sustentáveis.
+* **`time` (Nativa do Python):** Biblioteca de controle de tempo. Usada através do método `time.sleep()` para criar pausas estratégicas na execução do robô, garantindo o carregamento completo dos elementos na tela e evitando o bloqueio por sobrecarga nos servidores alvo.
 
-O que faz: É um "analisador" (parser) que lê o emaranhado de códigos HTML de uma página da web e permite buscar informações de forma estruturada.
+###  Engenharia e Transformação de Dados
 
-Por que usamos no projeto: Após o Selenium abrir a página, usamos o BeautifulSoup para vasculhar o código-fonte e extrair especificamente as tags (div, article) que continham as descrições e os valores das peças de moda sustentável.
+* **`pandas`:** Principal motor de manipulação de dados tabulares em Python. Utilizada para converter textos extraídos da web em *DataFrames* estruturados, remover registros duplicados, calcular métricas de negócio (como Ticket Médio) e exportar as bases finais para os formatos `.csv` e `.xlsx`.
+* **`re` (Expressões Regulares - Nativa):** Operador avançado de padrões textuais. Essencial para a etapa de limpeza de dados (*Data Cleaning*), permitindo localizar o padrão de moeda ("R$") e extrair algoritmicamente apenas os valores numéricos de preços em meio a strings complexas.
 
-time (Biblioteca nativa do Python):
+###  Business Intelligence e Tendências
 
-O que faz: Fornece funções relacionadas a tempo, como medições de performance ou paralisação de processos.
+* **`pytrends`:** Interface de conexão com a API não oficial do Google Trends. Adotada para cruzar os dados internos de precificação com o *mindshare* externo, extraindo o volume histórico de buscas orgânicas (Market Share vs. Share of Search) das marcas analisadas.
 
-Por que usamos no projeto: Utilizamos a função time.sleep() para criar pausas estratégicas de alguns segundos entre as ações do nosso robô. Isso garante que a página tenha tempo de carregar os elementos e evita sobrecarregar os servidores das lojas.
+### Visualização de Dados (Data Storytelling)
 
- Bibliotecas de Transformação e Limpeza de Dados
-pandas:
-
-O que faz: É a principal biblioteca do Python para manipulação, limpeza e análise de dados em formato tabular (linhas e colunas, chamados de DataFrames).
-
-Por que usamos no projeto: Utilizamos para converter os textos soltos extraídos da web em uma tabela de banco de dados estruturada, permitindo remover duplicatas, calcular o ticket médio das roupas e exportar o resultado final para CSV e Excel.
-
-re (Expressões Regulares - nativa do Python):
-
-O que faz: Fornece operações de correspondência de padrões complexos em textos.
-
-Por que usamos no projeto: Foi essencial para a engenharia de dados. Usamos uma regra de Regex para localizar matematicamente onde o valor estava no texto bruto (encontrando o "R$") e isolar os números de forma limpa, separando o nome do produto do seu preço.
-
- Bibliotecas de Business Intelligence e Tendências
-pytrends:
-
-O que faz: É uma API não oficial que permite conectar e extrair dados diretamente do banco de dados do Google Trends.
-
-Por que usamos no projeto: Para cruzar a nossa análise interna de precificação de estoque com o mindshare externo. Ela nos forneceu o volume histórico de buscas (0 a 100) para C&A, Renner e Riachuelo, permitindo identificar qual marca domina o interesse do consumidor.
-
- Bibliotecas de Visualização de Dados (Data Storytelling)
-matplotlib.pyplot:
-
-O que faz: É a biblioteca base do Python para criação de gráficos 2D.
-
-Por que usamos no projeto: Para criar a "tela" e a estrutura lógica por trás dos nossos gráficos, ajustando tamanhos de eixos, títulos e legendas.
-
-seaborn:
-
-O que faz: Construída em cima do Matplotlib, é uma biblioteca focada em visualização de dados estatísticos de forma elegante e com menos linhas de código.
-
-Por que usamos no projeto: Para gerar os nossos visuais estatísticos avançados, como o Boxplot de preços. Ela facilitou a injeção da sua paleta de cores minimalista (Marrom Sépia e Bege Quente) diretamente nos gráficos, garantindo a estética clean exigida no seu portfólio.
+* **`matplotlib.pyplot`:** Base de renderização gráfica do ecossistema Python. Utilizada para estruturar a "tela" dos relatórios, manipulando eixos, legendas, títulos e dimensões (*figure size*).
+* **`seaborn`:** Biblioteca de visualização estatística avançada. Escolhida pela sua capacidade de gerar *Boxplots* e gráficos de distribuição complexos com pouca verbosidade de código, além de facilitar a injeção da identidade visual e paleta de cores minimalista (Marrom Sépia e Bege Quente) adotada no projeto.
